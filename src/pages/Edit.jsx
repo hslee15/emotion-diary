@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom'
 
 const Edit = () => {
     const {id}=useParams()
-  return (
-    <div>{id} Edit</div>
-  )
+    return (
+        <div>{id} Edit</div>
+    )
 }
 
 export default Edit
