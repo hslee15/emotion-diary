@@ -45,10 +45,8 @@ const Home = () => {
     }
     return (
         <div>
-            <button
-                onClick={() => setMode(mode === "light" ? "dark" : "light")}
-                style={{ position: "absolute", top: "10px", left: "10px" }}
-            >
+            <button className='button-mode'
+                onClick={() => setMode(mode === "light" ? "dark" : "light")}>
                 {mode === "light" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
             </button>
             <Header

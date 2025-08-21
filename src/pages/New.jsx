@@ -8,6 +8,7 @@ import { DiaryDispatchContext } from '../App'
 import { useNavigate } from 'react-router-dom'
 
 const New = () => {
+    const navigate = useNavigate();
     const {onCreate}=useContext(DiaryDispatchContext)
 
     const onSubmit=(input)=>{
@@ -21,7 +22,7 @@ const New = () => {
         <div>
         <Header 
         title={"새 일기 쓰기"}
-        leftChild={<Button text={"< 뒤로가기"}/>}
+        leftChild={<Button text={"< 뒤로가기"} onClick={() => navigate(-1)} />}
         />
         <Editor onSubmit={onSubmit}/>
         </div>

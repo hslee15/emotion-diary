@@ -13,14 +13,17 @@
 html,
 body {
   margin: 0;
-  width: 100%
+  width: 100%;
+  height: 100%;
 }
 
 #root {
-  /* background-color: white; */
-
+  background-color: white;
   height: 100%;
+}
 
+#root.dark{
+  background-color: #000;
 }
 
 .Container {
@@ -51,5 +54,34 @@ img {
 .Container.dark button,
 .Container.dark .DiaryList .menu-bar select,
 .Container.dark select {
+  background-color: #000;
+}
+.button-mode{
+  background-color: #eee;
+  width: 80px;
+  height: 25px;
+  border: none;
+  border-radius:3px;
+  font-size: 16px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.button-mode:hover{
+  background-color: black;
+  color: white;
+  transform: scale(1.2);
+  
+}
+
+body.dark .button-mode:hover {
+  background-color: #fff;
+  color: #000;
+}
+body.dark .button-mode{
+  border: 0.5px solid white;
+}
+
+
+
+body.dark{
   background-color: #000;
 }

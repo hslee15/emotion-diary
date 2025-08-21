@@ -54,6 +54,7 @@ function reducer(state, action) {
 
 export const DiaryStateContext = createContext()
 export const DiaryDispatchContext = createContext()
+export const ModeContext = createContext();
 function App() {
 
   const [data, dispatch] = useReducer(reducer, mockData)
@@ -66,6 +67,17 @@ function App() {
       data:mockData
     })
   },[])
+
+  useEffect(() => {
+    const root = document.getElementById('root');
+    if (mode === "dark") {
+      document.body.classList.add("dark");
+      if (root) root.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+      if (root) root.classList.remove("dark");
+    }
+  }, [mode]);
 
   const onCreate = (createdDate, emotionId, content) => {
 
@@ -100,17 +112,19 @@ function App() {
   return (
     <div className={`Container ${mode}`}>
       <div className="content-wrap">
-        <DiaryStateContext.Provider value={data}>
-          <DiaryDispatchContext.Provider value={{onCreate,onUpdate,onDelete}}>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/new' element={<New />} />
-              <Route path='/edit/:id' element={<Edit />} />
-              <Route path='/diary/:id' element={<Diary />} />
-              <Route path='*' element={<Notfound />} />
-            </Routes>
-          </DiaryDispatchContext.Provider>
-        </DiaryStateContext.Provider>
+        <ModeContext.Provider value={{ mode, setMode }}>
+          <DiaryStateContext.Provider value={data}>
+            <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/new' element={<New />} />
+                <Route path='/edit/:id' element={<Edit />} />
+                <Route path='/diary/:id' element={<Diary />} />
+                <Route path='*' element={<Notfound />} />
+              </Routes>
+            </DiaryDispatchContext.Provider>
+          </DiaryStateContext.Provider>
+        </ModeContext.Provider>
       </div>
     </div>
   )

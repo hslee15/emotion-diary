@@ -1,28 +1,33 @@
-import React ,{useState,useContext} from 'react'
+import React ,{useState,useContext,useEffect} from 'react'
 import Button from './Button'
 import "./Editor.css"
 import EmotionItem from './EmotionItem'
 import Header from './Header'
 import { DiaryDispatchContext } from '../App'
 import { useNavigate } from 'react-router-dom'
+import { emotionList } from '../util/constants'
+import { getStringDate } from '../util/getStringDate'
 
-const emotionList = [
-    { emotionId: 1, emotionName: "완전 좋음" },
-    { emotionId: 2, emotionName: "좋음" },
-    { emotionId: 3, emotionName: "그럭저럭" },
-    { emotionId: 4, emotionName: "나쁨" },
-    { emotionId: 5, emotionName: "끔찍함" },
-];
 
-const Editor = (onSubmit) => {
+const Editor = ({ onSubmit, initData }) => {
     // const emotionId=4
 
     const nav = useNavigate()
+
     const [input, setInput]=useState({
         createdDate:new Date(),
         emotionId:3,
         content:""
     })
+
+    useEffect(()=>{
+        if(initData){
+            setInput({
+                ...initData,
+                createdDate:new Date(Number(initData.createdDate))
+            })
+        }
+    },[initData])
 
     const onChangeInput=(e)=>{
         let name=e.target.name;
@@ -47,7 +52,9 @@ const Editor = (onSubmit) => {
                 <input 
                 name='createdDate'
                 onChange={onChangeInput}
-                type="date"/>
+                type="date"
+                value={getStringDate(input.createdDate)}
+                />
             </section>
             <section className="emotion-section">
 
