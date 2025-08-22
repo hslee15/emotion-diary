@@ -4,7 +4,6 @@ import Button from '../components/Button'
 import DiaryList from '../components/DiaryList'
 import { DiaryStateContext, ModeContext } from '../App'
 import useTitle from '../hook/useTitle'
-import thumbnail from '../assets/thumbnail.png'
 
 const Home = () => {
     const data=useContext(DiaryStateContext)
@@ -53,11 +52,6 @@ const Home = () => {
                 {mode === "light" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
             </button>
 
-            <img
-                src={thumbnail}
-                alt="메인 썸네일"
-                style={{ width: "200px", margin: "20px auto", display: "block" }}
-            />
             <Header
             leftChild={<Button text={"<"} onClick={onDecreamentMonth}/>}
             title={`${pivotDate.getFullYear()}년 ${pivotDate.getMonth()+1}월`}
