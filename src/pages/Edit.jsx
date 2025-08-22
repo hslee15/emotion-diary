@@ -11,7 +11,7 @@ const Edit = () => {
     const params = useParams()
     const nav=useNavigate()
     const { onDelete, onUpdate } = useContext(DiaryDispatchContext)
-    const curDiaryItem = useDiary(params.id)
+    const curDiaryItem = useDiary(params.id,{redirectOnMissing:false})
 
         useTitle(`${params.id}번의 일기 수정하기`)
 
