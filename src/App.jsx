@@ -7,8 +7,6 @@ import Notfound from './pages/Notfound'
 import New from './pages/New'
 import { useReducer, useRef, createContext, useEffect, useState } from 'react'
 
-
-
 const mockData = [
   {
     id: 1,
@@ -31,66 +29,85 @@ const mockData = [
 ]
 
 function reducer(state, action) {
+  let nextState;
+
   switch (action.type) {
     case "INIT":
       return action.data
     case "CREATE":
-      return [action.data, ...state]
+      nextState=[action.data, ...state]
+      break;
     case "UPDATE":
-      return state.map((item) =>
+      nextState=state.map((item) =>
         String(item.id) === String(action.data.id) ?
           action.data
           : item
       )
+      break;
     case "DELETE":
-      return state.filter(
+      nextState=state.filter(
         (item) => String(item.id) !== String(action.id)
       )
+      break;
     default:
       return state
   }
+  localStorage.setItem('diary',JSON.stringify(nextState))
 
+  return nextState
 }
 
 export const DiaryStateContext = createContext()
 export const DiaryDispatchContext = createContext()
-export const ModeContext = createContext();
+export const ModeContext = createContext()
 function App() {
 
-  const [data, dispatch] = useReducer(reducer, mockData)
-  const idRef = useRef(4)
+  const [data, dispatch] = useReducer(reducer, [])
+  const idRef = useRef(0)
+  const [loading, setLoading]=useState(true)
   const [mode, setMode] = useState('light')
 
-  useEffect(()=>{
-    dispatch({
-      type:"INIT",
-      data:mockData
-    })
-  },[])
+  useEffect(() => {
+    const stored = localStorage.getItem('diary');
+    let initialData = [];
+
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          initialData = parsed;
+        }
+      } catch {
+      }
+    } else {
+      localStorage.setItem('diary', JSON.stringify([]));
+    }
+
+    const maxId = initialData.reduce((m, it) => Math.max(m, Number(it.id) || 0), 0);
+    idRef.current = maxId + 1;
+
+    dispatch({ type: 'INIT', data: initialData });
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
-    const root = document.getElementById('root');
-    if (mode === "dark") {
-      document.body.classList.add("dark");
-      if (root) root.classList.add("dark");
+    const root = document.getElementById('root')
+    if (mode === 'dark') {
+      document.body.classList.add('dark')
+      if (root) root.classList.add('dark')
     } else {
-      document.body.classList.remove("dark");
-      if (root) root.classList.remove("dark");
+      document.body.classList.remove('dark')
+      if (root) root.classList.remove('dark')
     }
   }, [mode]);
 
   const onCreate = (createdDate, emotionId, content) => {
-
+    const id = idRef.current++;
     dispatch({
-      type: "CREATE",
-      data: {
-        id: idRef.current++,
-        createdDate,
-        emotionId,
-        content
-      }
-    })
-  }
+      type: 'CREATE',
+      data: { id, createdDate, emotionId, content }
+    });
+  };
   const onUpdate = (id, createdDate, emotionId, content) => {
     dispatch({
       type: "UPDATE",
@@ -109,6 +126,11 @@ function App() {
       id
     })
   }
+
+  if(loading){
+    return <div>데이터를 불러오는 중입니다.</div>
+  }
+
   return (
     <div className={`Container ${mode}`}>
       <div className="content-wrap">

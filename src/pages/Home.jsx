@@ -3,9 +3,11 @@ import Header from '../components/Header'
 import Button from '../components/Button'
 import DiaryList from '../components/DiaryList'
 import { DiaryStateContext, ModeContext } from '../App'
+import useTitle from '../hook/useTitle'
 
 const Home = () => {
     const data=useContext(DiaryStateContext)
+    useTitle('일기 홈')
 
     const [pivotDate,setPivotDate]=useState(new Date())
     const { mode, setMode } = useContext(ModeContext);
