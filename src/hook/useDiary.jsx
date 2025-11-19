@@ -18,8 +18,8 @@ const useDiary = (id,{redirectOnMissing = true} ={})=>{
             setCurDiaryItem(null);
             return
         }
-        setCurDiaryItem(curDiaryItem)
-    }, [id, data, nav ,redirectOnMissing])
+        setCurDiaryItem(currentDiaryItem)
+    }, [id, data, nav ,redirectOnMissing]) 
     return curDiaryItem;
 
 }
