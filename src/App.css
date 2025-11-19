@@ -18,12 +18,13 @@ body {
 }
 
 #root {
-  background-color: white;
+  background-color: #fef8f3;
   height: 100%;
 }
 
 #root.dark{
   background-color: #000;
+  box-shadow: none;
 }
 
 .Container {
@@ -41,7 +42,6 @@ img {
   margin: auto;
 }
 
-
 .Container.dark {
   background-color: rgb(29, 29, 29);
   box-shadow: rgba(202, 202, 202, 0.9) 0px 0px 29px 0px;
@@ -56,8 +56,22 @@ img {
 .Container.dark select {
   background-color: #000;
 }
+.Container.dark .DiaryItem {
+  border-bottom: 1px solid #333;
+}
+.Container.dark .content-section {
+  background-color: #333;
+}
+.Container.dark .Editor section input {
+  background-color: #333;
+  color: #fff;
+}
+.Container.dark .Editor section textarea {
+  background-color: #444;
+  color: #fff;
+}
 .button-mode{
-  background-color: #eee;
+  background-color: #f5e6d3;
   width: 80px;
   height: 25px;
   border: none;
@@ -66,7 +80,7 @@ img {
   transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 .button-mode:hover{
-  background-color: black;
+  background-color: #d4a574;
   color: white;
   transform: scale(1.2);
   
@@ -77,6 +91,7 @@ body.dark .button-mode:hover {
   color: #000;
 }
 body.dark .button-mode{
+  background-color: #000;
   border: 0.5px solid white;
 }
 

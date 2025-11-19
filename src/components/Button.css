@@ -1,5 +1,5 @@
 .Button {
-    background-color: rgb(236, 236, 236);
+    background-color: #f5e6d3;
     cursor: pointer;
     border: none;
     padding: 10px 20px;
@@ -8,10 +8,10 @@
     border-radius: 5px ;
 }
 .Button.POSITIVE{
-    background-color: rgb(100, 201, 100);
+    background-color: #c9a87a;
     color: #fff;
 }
 .Button.NEGATIVE{
     color: #fff;
-    background-color: rgb(253, 86, 95);
+    background-color: #f4a88a;
 }

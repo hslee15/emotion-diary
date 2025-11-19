@@ -25,27 +25,27 @@
 }
 
 .emotion-img-wrapper.img-1 {
-    background-color: rgb(100, 201, 100);
+    background-color: #b8d4a0;
 }
 
 .emotion-img-wrapper.img-2 {
-    background-color: rgb(157, 215, 114);
+    background-color: #b8d4a0;
 }
 
 .emotion-img-wrapper.img-3 {
-    background-color: rgb(253, 206, 23);
+    background-color: #f5c97a;
 }
 
 .emotion-img-wrapper.img-4 {
-    background-color: rgb(253, 132, 70);
+    background-color: #f4a88a;
 }
 
 .emotion-img-wrapper.img-5 {
-    background-color: rgb(253, 86, 95);
+    background-color: #e89a9a;
 }
 
 .content-section {
-    background-color: #fafafa;
+    background-color: #fef8f3;
     border-radius: 10px;
     padding: 20px;
 }
